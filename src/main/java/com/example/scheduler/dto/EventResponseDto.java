@@ -14,4 +14,12 @@ public class EventResponseDto {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
+    public EventResponseDto(Event event) {
+       this.id = event.getId();
+       this.task = event.getTask();
+       this.authorName = event.getAuthorName();
+       this.createdAt = event.getCreatedAt();
+       this.updatedAt = event.getUpdatedAt();
+    }
+
 }
