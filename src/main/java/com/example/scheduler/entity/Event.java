@@ -2,7 +2,6 @@ package com.example.scheduler.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.Setter;
 
 import java.time.LocalDateTime;
 
@@ -11,7 +10,6 @@ import java.time.LocalDateTime;
 
 public class Event {
 
-    @Setter
     private long id;
     private String task;
     private String authorName;

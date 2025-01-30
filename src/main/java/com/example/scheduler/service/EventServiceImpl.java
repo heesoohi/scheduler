@@ -7,9 +7,11 @@ import com.example.scheduler.repository.EventRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EventServiceImpl implements EventService {
@@ -27,55 +29,49 @@ public class EventServiceImpl implements EventService {
         Event event = new Event(dto.getTask(), dto.getAuthorName(), dto.getPassword());
 
         // DB 저장
-        Event savedEvent = eventRepository.saveEvent(event);
-
-        return new EventResponseDto(savedEvent);
+        return eventRepository.saveEvent(event);
     }
 
     @Override
     public ResponseEntity<EventResponseDto> findAllEvents() {
 
-        return eventRepository.findAllEvents();;
+        return eventRepository.findAllEvents();
     }
 
     @Override
     public EventResponseDto findEventById(Long id) {
 
-        Event event = eventRepository.findEventById(id);
-
-        if (event == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Does not exist id: " + id);
-        }
+        Event event = eventRepository.findEventByIdOrElseThrow(id);
 
         return new EventResponseDto(event);
     }
 
+    @Transactional
     @Override
     public EventResponseDto updateEvent(Long id, String task, String authorName) {
-
-        Event event = eventRepository.findEventById(id);
-
-        if (event == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Does not exist id: " + id);
-        }
 
         if (task == null || authorName == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The task and author name are required values.");
         }
 
-        event.update(task, authorName, password);
+        int updatedRow = eventRepository.updateEvent(id, task);
+
+        if (updatedRow == 0) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Does not exist id: " + id);
+        }
+
+        Event event = eventRepository.findEventByIdOrElseThrow(id);
 
         return new EventResponseDto(event);
     }
 
     @Override
     public void deleteEvent(Long id) {
-        Event event = eventRepository.findEventById(id);
 
-        if (event == null) {
+        int deletedRow = eventRepository.deleteEvent(id);
+
+        if (deletedRow == 0) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Does not exist id: " + id);
         }
-
-        eventRepository.deleteEvent(id);
     }
 }

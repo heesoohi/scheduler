@@ -1,10 +1,13 @@
 package com.example.scheduler.dto;
 
+import com.example.scheduler.entity.Event;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
 
 @Getter
+@AllArgsConstructor
 public class EventResponseDto {
 
     // password 는 반환하지 않음
