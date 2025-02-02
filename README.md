@@ -11,4 +11,5 @@
 | 선택 일정 삭제 | `DELETE` | `/api/events/{id}` | 없음                                                                                                                     | 성공 시: `200 OK`<br>실패 시: `404 Not Found`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 
 
+## ERD
 ![img_1.png](img_1.png)
