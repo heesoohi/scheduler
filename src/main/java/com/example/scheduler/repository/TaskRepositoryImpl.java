@@ -117,9 +117,10 @@ public class TaskRepositoryImpl implements TaskRepository {
 
     @Override
     public void deleteTaskById(Long id) {
-        jdbcTemplate.update(
-                "delete from task where id = ?",
-                id
-        );
+
+        int affectedRows = jdbcTemplate.update("DELETE FROM task WHERE id = ?", id);
+        if (affectedRows == 0) {
+            throw new IllegalArgumentException("삭제할 일정이 존재하지 않습니다.");
+        }
     }
 }
