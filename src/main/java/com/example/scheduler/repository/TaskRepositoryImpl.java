@@ -34,6 +34,7 @@ public class TaskRepositoryImpl implements TaskRepository {
             );
             ps.setString(1, task.getContent());
             ps.setString(2, task.getWriter());
+            ps.setLong(3, task.getPassword());
             return ps;
         }, keyHolder);
 
