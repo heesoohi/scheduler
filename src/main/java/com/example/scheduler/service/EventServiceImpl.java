@@ -10,9 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.List;
-import java.util.Optional;
-
 @Service
 public class EventServiceImpl implements EventService {
 
@@ -35,7 +32,7 @@ public class EventServiceImpl implements EventService {
     @Override
     public ResponseEntity<EventResponseDto> findAllEvents() {
 
-        return eventRepository.findAllEvents();
+        return (ResponseEntity<EventResponseDto>)eventRepository.findAllEvents();
     }
 
     @Override

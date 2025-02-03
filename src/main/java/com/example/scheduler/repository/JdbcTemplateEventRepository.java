@@ -39,13 +39,12 @@ public class JdbcTemplateEventRepository implements EventRepository {
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("task", event.getTask());
         parameters.put("authorName", event.getAuthorName());
-        parameters.put("createdAt", event.getCreatedAt());
         parameters.put("updatedAt", event.getUpdatedAt());
 
         // 저장 후 생성된 key 값을 Number 타입으로 반환하는 메서드
         Number key = jdbcInsert.executeAndReturnKey(new MapSqlParameterSource(parameters));
 
-        return new EventResponseDto(key.longValue(), event.getTask(), event.getAuthorName(), event.getCreatedAt(), event.getUpdatedAt());
+        return new EventResponseDto(key.longValue(), event.getTask(), event.getAuthorName(), event.getUpdatedAt());
     }
 
     @Override

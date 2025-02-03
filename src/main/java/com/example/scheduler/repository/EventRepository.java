@@ -19,6 +19,4 @@ public interface EventRepository {
     int updateEvent(Long id, String task);
 
     int deleteEvent(Long id);
-
-
 }

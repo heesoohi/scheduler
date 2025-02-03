@@ -43,7 +43,7 @@ public class EventController {
             @PathVariable Long id,
             @RequestBody EventRequestDto dto
     ) {
-        return new ResponseEntity<>(eventService.updateEvent(id, dto.getTask(), dto.getAuthorName(), HttpStatus.OK));
+        return new ResponseEntity<>(eventService.updateEvent(id, dto.getTask(), dto.getAuthorName()), HttpStatus.OK);
 
     }
 

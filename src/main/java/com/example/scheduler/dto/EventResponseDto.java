@@ -14,15 +14,18 @@ public class EventResponseDto {
     private long id;
     private String task;
     private String authorName;
-    private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
     public EventResponseDto(Event event) {
        this.id = event.getId();
        this.task = event.getTask();
        this.authorName = event.getAuthorName();
-       this.createdAt = event.getCreatedAt();
        this.updatedAt = event.getUpdatedAt();
     }
 
+    public EventResponseDto(long id, String task, String authorName) {
+        this.id = id;
+        this.task = task;
+        this.authorName = authorName;
+    }
 }
