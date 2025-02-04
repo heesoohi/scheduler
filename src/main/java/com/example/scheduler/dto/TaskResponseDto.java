@@ -5,7 +5,7 @@ import lombok.Getter;
 import java.time.LocalDateTime;
 
 @Getter
-public class TaskResponseDto {
+public class TaskResponseDto { // 비밀번호는 반환되면 안 됨.
     private final Long id;
     private final String content;
     private final String writer;

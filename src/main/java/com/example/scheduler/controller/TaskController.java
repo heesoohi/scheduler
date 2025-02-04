@@ -15,11 +15,13 @@ import java.util.List;
 public class TaskController {
     private final TaskService taskService;
 
+    // 일정 생성 API
     @PostMapping("/tasks")
     public ResponseEntity<TaskResponseDto> saveTask(@RequestBody TaskRequestDto dto) {
         return ResponseEntity.ok(taskService.saveTask(dto));
     }
 
+    // 전체 일정 조회 API
     @GetMapping("/tasks")
     public ResponseEntity<List<TaskResponseDto>> getTasks(
             @RequestParam(required = false) String writer,
@@ -32,16 +34,19 @@ public class TaskController {
         return ResponseEntity.ok(taskService.getTasks(writer, updatedDateTime));
     }
 
+    // 선택 일정 조회 API
     @GetMapping("/tasks/{id}")
     public ResponseEntity<TaskResponseDto> getTask(@PathVariable Long id) {
         return ResponseEntity.ok(taskService.getTask(id));
     }
 
+    // 선택 일정 수정 API
     @PutMapping("/tasks/{id}")
     public ResponseEntity<TaskResponseDto> updateTask(@PathVariable Long id, @RequestBody TaskRequestDto dto) {
         return ResponseEntity.ok(taskService.updateTask(id, dto));
     }
 
+    // 선택 일정 삭제 API
     @DeleteMapping("/tasks/{id}")
     public ResponseEntity<String> deleteTask(@PathVariable Long id, @RequestParam long password) {
         taskService.deleteTaskById(id, password);

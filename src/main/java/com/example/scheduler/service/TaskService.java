@@ -67,6 +67,7 @@ public class TaskService {
 
     @Transactional(readOnly = true)
     public TaskResponseDto getTask(Long id) {
+        // 주어진 id로 Task 객체 조회, 존재하지 않으면 예외 발생
         Task task = taskRepository.findTaskById(id).orElseThrow(
                 () -> new IllegalArgumentException("해당 할 일이 존재하지 않습니다.")
         );
