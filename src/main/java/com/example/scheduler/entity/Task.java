@@ -2,12 +2,14 @@ package com.example.scheduler.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
 @Getter
 @AllArgsConstructor
 public class Task {
+    @Setter
     private long id; // database auto increment
     private String content;
     private String writer;
@@ -35,9 +37,5 @@ public class Task {
         this.writer = writer;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
-    }
-
-    public void setId(long l) {
-
     }
 }
